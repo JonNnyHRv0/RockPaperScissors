@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<label for="choice">Select Rock, Paper, or Scissors:</label>
+<select autocomplete = "off" id="choice">
+    <option value="" selected = "off">--Make a choice--</option>
+    <option value="rock">Rock</option>
+    <option value="paper">Paper</option>
+    <option value="scissors">Scissors</option>
+</select>
+
+<p></p>
+
+    <script>
+
+        var select = document.querySelector("select");
+        var para = document.querySelector("p");
+
+        
+        
+        select.addEventListener("change", gameStart);
+    
+
+        function gameStart() {
+            let choice = select.value;
+            let result = computerPlay();
+
+            function computerPlay() {
+            return Math.floor(Math.random() * ((3 - 1) + 1) + 1);
+            }
+
+            if (choice === "rock" && result == 3) {
+                para.textContent = "You win!";
+            }else if (choice === "rock" && result == 2) {
+                para.textContent = "You lose!";
+            }else if (choice === "rock" && result == 1) {
+                para.textContent = "Tie!";
+            }else if (choice === "paper" && result == 1) {
+                para.textContent = "You win!";
+            }else if (choice == "paper" && result == 3) {
+                para.textContent = "You lose!";
+            }else if (choice === "paper" && result == 2) {
+                para.textContent = "Tie!";
+            }else if (choice === "scissors" && result == 2) {
+                para.textContent = "You win!";
+            }else if (choice == "scissors" && result == 1) {
+                para.textContent = "You lose!";
+            }else if (choice === "scissors" && result == 3) {
+                para.textContent = "Tie!";          
+            }
+
+
+        }
+        
+    
+        
+    </script>
+</body>
+</html>
+
