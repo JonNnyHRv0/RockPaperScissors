@@ -2,65 +2,76 @@
 <html>
 <head>
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    
 </head>
 <body>
 
-<label for="choice">Select Rock, Paper, or Scissors:</label>
-<select autocomplete = "off" id="choice">
-    <option value="" selected = "off">--Make a choice--</option>
-    <option value="rock">Rock</option>
-    <option value="paper">Paper</option>
-    <option value="scissors">Scissors</option>
-</select>
 
-<p></p>
 
-    <script>
+<script>
+//STEP 1 -> Create a computerPlay function that randomly returns rock, paper, or scissors
 
-        var select = document.querySelector("select");
-        var para = document.querySelector("p");
-
-        
-        
-        select.addEventListener("change", gameStart);
+function computerPlay() {
+    let result = Math.floor(Math.random() * ((3 - 1) + 1) + 1);
     
+    if (result == 1) {
+        return "rock";
+    }else if (result == 2) {
+        return "paper";
+    }else{
+        return "scissors";
+    }
+}
 
-        function gameStart() {
-            let choice = select.value;
-            let result = computerPlay();
+//STEP 2 -> Create a function that plays a single round that takes two parameters:
+//1)playerSelection & computerSelection which returns a string that declares the winner:
+//"You lose! Paper beats Rock"
+//return results of function call not console.log()
+//also make users input case insensitive (rock, Rock, RocK)
 
-            function computerPlay() {
-            return Math.floor(Math.random() * ((3 - 1) + 1) + 1);
-            }
+function playRound(playerSelection, computerSelection) {
 
-            if (choice === "rock" && result == 3) {
-                para.textContent = "You win!";
-            }else if (choice === "rock" && result == 2) {
-                para.textContent = "You lose!";
-            }else if (choice === "rock" && result == 1) {
-                para.textContent = "Tie!";
-            }else if (choice === "paper" && result == 1) {
-                para.textContent = "You win!";
-            }else if (choice == "paper" && result == 3) {
-                para.textContent = "You lose!";
-            }else if (choice === "paper" && result == 2) {
-                para.textContent = "Tie!";
-            }else if (choice === "scissors" && result == 2) {
-                para.textContent = "You win!";
-            }else if (choice == "scissors" && result == 1) {
-                para.textContent = "You lose!";
-            }else if (choice === "scissors" && result == 3) {
-                para.textContent = "Tie!";          
-            }
+    playerSelection.toLowerCase();
+
+    if (playerSelection === "rock" && computerSelection ===  "paper") {
+        return "You Lose! Paper beats Rock";
+    }else if (playerSelection === "scissors" && computerSelection ===  "rock") {
+        return "You Lose! Rock beats Scissors"
+    }else if (playerSelection === "paper" && computerSelection ===  "scissors") {
+        return "You Lose! Scissors beats Paper"
+    }else if (playerSelection === "paper" && computerSelection ===  "rock") {
+        return "You Win! Paper beats Rock"
+    }else if (playerSelection === "rock" && computerSelection ===  "scissors") {
+        return "You Win! Rock beats Scissors"
+    }else if (playerSelection === "scissors" && computerSelection ===  "paper") {
+        return "You Win! Scissors beats Paper"
+    }else{
+        return "Tie!";
+    }
+
+}
 
 
-        }
+//STEP 3 -> Write a function called game() that uses the previous function inside
+//this one to play 5 round game that keeps score and reports winner & loser at end
+//for now, continue to display results of each round using console.log
+//use prompt() to get user input
+//feel free to change previous function's return values to something more useful
+//feel free to use helper functions if more useful
+
+
+function game() {
+
+    const playerSelection = prompt("Rock, Paper, or Scissors?", "");
+    const computerSelection = computerPlay();
+
+    console.log(playRound(playerSelection, computerSelection));
+
+}
         
     
         
-    </script>
+</script>
 </body>
 </html>
 
